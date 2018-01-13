@@ -1,0 +1,5 @@
+# KDevelop project file
+*.kdev4
+
+# Build files
+build/
