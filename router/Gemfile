@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'http'
+gem 'jwt'
+gem 'pry'
+gem 'rubocop'
+gem 'sinatra'
+gem 'thin'

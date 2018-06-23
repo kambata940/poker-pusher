@@ -5,26 +5,20 @@
 Install all dependencies
 
 ```
-bundle
-```
-
-Use the project's git hooks
-
-```bash
-git config core.hooksPath hooks
+bin/install
 ```
 
 ## Booting the server
 
-Starting the fake router server
+Starting the router server
 ```bash
-be thin start -R router.ru -p 9290
+thin start -R router/config.ru -p 9290
 ```
 
 Starting the WebSocket worker server
 ```bash
-be thin start -R config.ru -p 9292
+thin start -R worker/config.ru -p 9292
 ```
 
 ## Play with it
-Open the html client `test-client.html` a browser and send start sending messages :)
+Open the html client `stubs/test-client.html` a browser and send start sending messages :)

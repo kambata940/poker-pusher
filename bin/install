@@ -1,0 +1,8 @@
+#!/bin/sh
+
+gem install thin
+
+BUNDLE_GEMFILE="router/Gemfile" bundle
+BUNDLE_GEMFILE="worker/Gemfile" bundle
+
+git config core.hooksPath hooks
