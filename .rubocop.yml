@@ -1,0 +1,15 @@
+Style/Documentation:
+  Enabled: false
+
+Style/ModuleFunction:
+  EnforcedStyle: extend_self
+
+Style/MutableConstant:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+  IndentationWidth: 2

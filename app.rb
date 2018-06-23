@@ -9,7 +9,7 @@ require 'http'
 
 Faye::WebSocket.load_adapter('thin')
 
-SocketStore = {}
+SOCKET_STORE = {}
 
 module Comunication
   extend self
@@ -28,19 +28,19 @@ module Comunication
 
     p [:connect]
 
-    SocketStore[user_id] = socket
+    SOCKET_STORE[user_id] = socket
   end
 
   def disconnect(socket)
     p [:disconnect]
 
-    user_id, _ = SocketStore.find { |s| s == socket }
+    user_id, _socket = SOCKET_STORE.find { |s| s == socket }
 
     EM.next_tick do
       HTTP.delete("#{ROUTER_URL}/users", form: { user_id: user_id, server_id: 1 })
     end
 
-    SocketStore.delete(user_id)
+    SOCKET_STORE.delete(user_id)
   end
 end
 
@@ -82,7 +82,7 @@ end
 get '/users' do
   headers 'Access-Control-Allow-Origin' => '*'
 
-  [200, SocketStore.keys.to_json]
+  [200, SOCKET_STORE.keys.to_json]
 end
 
 post '/messages' do
@@ -91,7 +91,7 @@ post '/messages' do
 
   # FORMAT: status: [:ok, :forbidden], type: ['text', 'json'], content: [JSON, TEXT]
   # The status code is set by the Web socket server
-  if SocketStore[params['user_id']].send(body.merge(status: :ok).to_json)
+  if SOCKET_STORE[params['user_id']].send(body.merge(status: :ok).to_json)
     200
   else
     400
