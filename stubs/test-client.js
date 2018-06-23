@@ -15,7 +15,7 @@ $(() => {
   let RECEIVERS = [];
   setInterval(() => {
     $.get({
-      url: 'http://localhost:9292/users',
+      url: '/router/users',
       success: (data) => {
         const receivers = JSON.parse(data);
 
@@ -40,7 +40,7 @@ $(() => {
     receiver = UI.receiversSelect.find(':selected').val();
 
     $.post({
-      url: 'http://localhost:9292/messages',
+      url: '/router/messages',
       data: {
         user_id: receiver,
         body: JSON.stringify({type: 'text', content: UI.messageInput.val()}),
@@ -50,7 +50,7 @@ $(() => {
   });
 
   $.post({
-    url: 'http://localhost:9292/client_server/login',
+    url: '/router/client_server/login',
     data: {
       user_id: USER_ID,
     },
@@ -62,7 +62,9 @@ $(() => {
 })
 
 function connectSocket({UI, USER_ID, token}) {
-  const socket = new WebSocket(`ws://localhost:9292/web_socket`);
+  const socket = new WebSocket(`ws://${window.location.host}/worker/web_socket`);
+
+  setInterval(1000, () => { socket.send({type: 'ping'}); });
 
   socket.onopen = (event) => {
     console.log('Web socket connected');

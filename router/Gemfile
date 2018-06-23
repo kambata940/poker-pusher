@@ -1,8 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'eventmachine'
 gem 'http'
 gem 'jwt'
 gem 'pry'
 gem 'rubocop'
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'thin'
+
+group :development do
+  gem 'rerun'
+end

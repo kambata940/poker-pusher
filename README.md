@@ -17,7 +17,7 @@ thin start -R router/config.ru -p 9290
 
 Starting the WebSocket worker server
 ```bash
-thin start -R worker/config.ru -p 9292
+WORKER_PORT='9292' thin start -R worker/config.ru -p 9292
 ```
 
 ## Play with it
