@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'eventmachine'
+gem 'faye-websocket'
+gem 'http'
+gem 'jwt'
+gem 'pry'
+gem 'rubocop'
+gem 'sinatra'
+gem 'thin'
